@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <!-- Jakob Van Rees -->
+<head>
+    <title>League Game</title>
+	<style>
+		a {color:#0d19aa}
+		h1 {font-family: Arial, sans-serif;}
+		h2 {font-family: Times, serif;}
+	
+	</style>
+	
+</head>
+<body style="background-color: #d58c21">
+    <div style="color: #0d19aa; font-family: Arial, sans-serif;"><h1>League of Legends Challenge</h1><hr></div>
+    <div id="randquestion"></div>
+    <div id="image"><img src="League Map.PNG" usemap="#image-map"></div>
+    <div id="randimap"></div>
+
+<script>
+let questions = [
+    "<h2>Click on the area of the map that is Mid Lane.</h2>",
+    "<h2>Click on the area of the map that is Bot Lane.</h2>",
+    "<h2>Click on the area of the map that is Top Lane.</h2>",
+    "<h2>Click on the area of the map that is Right Jungle.</h2>",
+    "<h2>Click on the area of the map that is Home Base.</h2>",
+    "<h2>Click on the area of the map that is enemy Base.</h2>",
+    "<h2>Click on the area of the map that is Left Jungle.</h2>"
+];
+
+let maps = [
+    "<map name='image-map'><area target='' alt='Mid Lane' title='Mid Lane' href='correct.html' coords='308,414,346,376,360,361,388,333,412,324,447,292,489,245,523,209,542,190,515,173,481,202,430,244,412,267,382,292,357,313,336,336,322,349,278,392,294,406' shape='poly'><area target='' alt='League' title='League' href='incorrect.html' coords='166,450,163,371,337,389,365,362,407,327,434,304,459,281,488,253,527,201,505,175,291,384,165,371,179,208,206,86,278,49,455,50,513,46,572,42,658,64,658,155,647,254,652,429,572,542,346,539,201,539,179,522,170,491' shape='poly'></map>",
+    "<map name='image-map'><area target='' alt='Bot Lane' title='Bot Lane' href='correct.html' coords='319,497,346,492,373,493,415,494,445,494,488,494,514,494,554,483,556,437,594,444,605,423,609,399,608,383,610,351,609,315,608,271,604,232,606,207,645,215,648,235,648,262,647,283,648,322,648,333,649,355,648,366,643,381,645,401,645,418,640,431,631,446,624,456,606,476,605,493,577,505,567,517,551,524,516,526,488,528,469,530,449,529,421,532,406,529,382,530,359,529,335,528,316,526' shape='poly'><area target='' alt='League' title='League' href='incorrect.html' coords='309,534,319,506,355,506,404,504,458,498,505,495,532,491,560,477,587,452,617,422,615,374,618,345,615,319,615,282,609,236,610,229,638,230,649,224,657,194,662,138,666,93,659,69,624,61,531,57,459,60,333,62,244,79,197,113,167,197,150,533,181,542' shape='poly'></map>",
+    "<map name='image-map'><area target='' alt='Top Lane' title='Top Lane' href='correct.html' coords='172,378,212,379,217,352,219,321,217,294,212,265,213,236,217,223,220,205,220,189,218,171,221,158,225,147,231,143,250,140,256,130,263,128,265,108,273,104,290,103,302,100,304,90,327,93,334,94,346,97,355,98,366,93,379,95,392,93,409,92,430,93,454,96,491,95,500,95,497,79,500,63,483,55,470,54,453,54,440,54,423,54,410,54,375,54,349,55,313,55,288,59,266,66,258,74,232,88,212,103,193,119,183,149,178,180,176,200,175,228' shape='poly'><area target='' alt='League' title='League' href='incorrect.html' coords='182,379,217,373,215,337,213,287,215,230,216,200,221,169,237,130,265,109,293,97,335,86,368,81,421,87,458,84,501,86,509,64,532,57,601,53,631,53,654,59,659,98,660,168,661,236,659,291,665,384,641,460,627,509,555,530,451,534,333,542,249,540,166,532,166,439,166,406,164,399' shape='poly'></map>",
+    "<map name='image-map'><area target='' alt='Right Jungle' title='Right Jungle' href='correct.html'' coords='313,416,316,432,320,448,326,475,327,488,339,488,362,488,391,489,425,488,461,490,498,489,531,484,548,471,551,443,571,431,593,431,596,424,598,397,601,374,603,343,602,303,603,254,600,217,581,206,557,199,547,195' shape='poly'><area target='' alt='League' title='League' href='incorrect.html'' coords='328,381,395,331,472,260,505,217,522,202,582,216,608,225,663,203,656,126,660,98,651,65,603,45,490,36,365,32,260,52,179,81,161,198,143,299,145,410,161,523,184,525,242,541,301,526,372,530,381,532,269,537,429,530,451,525,527,521,576,513,608,492,635,440,650,391,663,204,616,214,607,442,550,486,348,494' shape='poly'></map>",
+    "<map name='image-map'><area target='' alt='Home Base' title='Home Base' href='correct.html' coords='309,525,313,495,314,477,305,448,296,430,287,422,266,405,252,397,208,386,197,385,172,389,165,431,160,471,164,489,162,527,200,537,235,533,256,532,269,532' shape='poly'><area target='' alt='League' title='League' href='incorrect.html' coords='324,523,316,485,315,451,305,417,280,396,240,385,191,377,179,373,175,354,174,288,179,215,183,137,198,84,251,68,323,63,399,59,523,59,618,62,658,68,668,116,663,188,650,320,652,444,637,516,531,527,440,528' shape='poly'></map>",
+    "<map name='image-map'><area target='' alt='Enemy Base' title='Enemy Base' href='correct.html' coords='542,177,557,182,579,187,629,198,647,197,654,187,661,164,662,149,658,130,661,111,655,96,655,78,613,55,599,53,569,51,537,52,518,56,504,65,506,97,511,124' shape='poly'><area target='' alt='League' title='League' href='incorrect.html' coords='506,62,516,121,521,155,553,190,620,210,652,218,654,262,658,349,653,434,633,476,592,508,499,528,413,529,355,529,205,525,192,522,180,478,169,388,174,285,169,189,183,95,232,59,341,49,422,44,459,46,469,50,488,50' shape='poly'></map>",
+    "<map name='image-map'><area target='' alt='Left Jungle' title='Left Jungle' href='correct.html' coords='269,387,222,378,221,341,227,297,222,265,222,243,224,199,224,178,239,146,269,135,273,110,315,95,330,95,340,93,368,92,391,94,415,95,436,95,469,95,492,98,507,132,504,144,509,166,502,176' shape='poly'><area target='' alt='League' title='League' href='incorrect.html' coords='202,351,298,381,510,171,485,91,667,48,667,324,654,454,541,531,368,525,266,525,221,497,190,428,172,331,176,221,196,115,246,63,387,50,666,49,476,89,279,93,220,148,213,279,206,307' shape='poly'></map>"
+];
+
+let randq = Math.floor(Math.random() * 7);
+
+console.log(randq);
+
+document.getElementById('randquestion').innerHTML = questions[randq];
+document.getElementById('randimap').innerHTML = maps[randq];
+</script>
+
+</body>
+</html>
